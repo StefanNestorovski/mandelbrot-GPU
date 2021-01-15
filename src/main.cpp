@@ -47,7 +47,7 @@ int main()
 
 	// glfw window creation
 	// --------------------
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "MeinCreft", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Mandelbrot", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -115,6 +115,10 @@ int main()
 	mandelbrotShader.use();
 	mandelbrotShader.setVec2("screenRes", (float)SCR_WIDTH, (float)SCR_HEIGHT);
 
+	std::cout << "Move around using WASD" << std::endl;
+	std::cout << "Zoom out: Q, Zoom in: E" << std::endl;
+	std::cout << "Adjust max iterations Z/X" << std::endl;
+
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
@@ -179,10 +183,9 @@ void processInput(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		centerLocX += moveSpeed * deltaTime;
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-		zoom *= 0.95;
+		zoom *= 0.98;
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-		zoom *= 1.05;
-	std::cout << zoom << std::endl;
+		zoom *= 1.02;
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
