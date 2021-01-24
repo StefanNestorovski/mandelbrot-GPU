@@ -8,6 +8,8 @@
 #include "camera.h"
 
 #include <iostream>
+#include <filesystem>
+namespace fs = std::experimental::filesystem;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -76,7 +78,12 @@ int main()
 
 	// build and compile our shader program
 	// ------------------------------------
-	Shader mandelbrotShader("D:\\Coding\\OpenGLMC\\src\\OpenGLMC\\OpenGLMC\\mandelbrotshader.vs", "D:\\Coding\\OpenGLMC\\src\\OpenGLMC\\OpenGLMC\\mandelbrotshader.fs");
+	fs::path pvs = fs::current_path().parent_path();
+	pvs += "\\src\\shaders\\mandelbrotshader.vs";
+	fs::path pfs = fs::current_path().parent_path();
+	pfs += "\\src\\shaders\\mandelbrotshader.fs";
+
+	Shader mandelbrotShader(pvs.generic_string().c_str(), pfs.generic_string().c_str());
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
